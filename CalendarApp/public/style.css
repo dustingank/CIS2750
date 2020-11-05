@@ -1,0 +1,102 @@
+html {
+    width: 60%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: white;
+}
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: white;
+    overflow-y: scroll;
+}
+#error_message{
+    background-color: white;
+}
+#file_list{
+    background-color: white;
+}
+#text_area{
+    visibility: hidden;
+}
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border:none;
+    outline:none;
+    color:white;
+    padding:14px 16px;
+    background-color: inherit;
+    font-family:inherit;
+    margin:0;
+
+}
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 20px;
+    text-align: center
+}
+#get_file {
+    background-color: gray;
+    border:1px solid;
+    padding: 10px;
+
+}
+#clear {
+    background-color: gray;
+    border:1px solid;
+    padding: 10px;
+
+}
+
+#my_file {
+    display: none;
+}
+#customfileupload {
+    display: inline;
+    background-color: #fff;
+    font-size: 14px;
+    padding: 10px 30px 10px 30px;
+    width: 250px;
+    border: 1px solid #999;
+    box-shadow: inset 1px 1px 5px #ccc;
+}
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Online Calendar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <h3 class="text-center">Welcome To Online Calendar</h3>
+    <hr>
+    <br>
+    <div id = "Status_Panel"> <h3>Status</h3>
+        <div style = "height:300px; width:1000px; overflow-y:scroll; overflow-x: scroll" id="status_message">
+        </div>
+    </div>
+    <br>
+    <input type="reset" id = "clear" value = "Clear">
+    <br>
+    <hr>
+    <br>
+    <div id = "Login"><h3>Login TO Database</h3>
+        Usename:<input type="name" name="Usename" id="Usename" ><br><hr>
+        Password:<input type="password" name="Password" id="Password"><br><hr>
+        Database:<input type="name" name="Database" id = "Database"><br><hr>
+        <button id="login_buttom">Login</button><br><br>
+    </div>
+    <hr>
+    <h3>Database View</h3>
+    <br \><br \>
+
+    <input type="button" id="Store_All_Files" value = "Store All Files" disabled></input>
+    <input type="button" id ="clear_all_data" value = "Clear All Data" disabled></input>
+    <input type="button" id ="display_db_status" value = "Display DB Status" disabled></input>
+    <input type="button" id = "execute_query" value = "execute_query" disabled></input>
+    <div id="database_view" style="display:none;">
+        1>>>>Display all events sorted by start date <br>
+        2>>>>Display event from a specific file <br>
+        3>>>>Display all events that conflit with each other <br>
+        Enter Options:<input type="name" name = "options" id="options" ><br><hr>
+        Enter File Name(the file exdension must be .ics):<input type="name" name = "file_name", id = "file_name"><br><hr>
+        <br>
+        <br>
+        <div style = "height:600px; width:1000px; overflow-y:scroll; overflow-x: scroll; display:none;" id = "database_panel">
+            <table id = "database" style = "height: 200px; width: 1000px; overflow-y: scroll; overflow-x: scroll">
+                <tr>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr><br \><br \>
+    <div id = "File_Log_Panel"> <h3>File Log</h3>
+        <div style = "height:200px; width:1000px; overflow-y:scroll; overflow-x: scroll" id="file_list">
+            <br>
+            <table id= "fileInfo">
+                <tr>
+                    <th>File Name<br>(click to download)</th>
+                    <th>Version</th>
+                    <th>Product ID</th>
+                    <th>Number of <br> events</th>
+                    <th>Number of <br> properties</th>
+                </tr>
+            </table> 
+        </div>
+    </div>
+    <br>
+    <form action='/upload' method='post' encType="multipart/form-data">
+        <input type="file" value="uploads File" name='uploadFile'></input>
+        <input type="submit" id="submit_buttom"></input>
+    </form>
+    <br>
+    <hr>
+    <br>
+
+
+    <div id = "Calendar_view"> <h3>Calendar View</h3>
+        <br>
+        <br>
+        <select id="all_file_list" placeholder="Choose a file ...">
+            <option value="">Choose a file ...</option>
+        </select>
+        <div style = "height:200px; width:800px; overflow-y:scroll; overflow-x: scroll" id="Cal_info">
+            <br>
+            <table id="CalendarInfo">
+                <tr>
+                    <th>Event No</th>
+                    <th>Start date</th>
+                    <th>Start time</th>
+                    <th>Summary</th>
+                    <th>Props</th>
+                    <th>Alarms</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <input type="button" id="viewAlarm" value = "View Alarm"></input>
+    <select placheholder="Choose a evnet ..." id="event_list">
+        <option value="">Choose an event ...</option>
+    </select>
+    <input type="button" id="view" value = "View More option"></input>
+    <br><br>
+    <div id="text_area"></div>
+
+    <br \><br \><br \><br \><br \>
+    <h3>Create Calendar</h3>
+    <div id = "Create calendar"> <button id="create_calendar">Create Calendar</button><br><br>
+        File Name: <input type="name" name="file_name" id="file_name"><br><hr>
+        Version Number: <input type="name" name="version_number" id="version_number"><br><hr>
+        Product ID: <input type="name" name="product_id" id="product_id"><br><hr>
+        Event UID: <input type="name" name="event_id" id="event_id"><br><hr>
+        Event Creation Date(yyyymmdd): <input type="name" name="start_date" id="start_stamp"><br><hr>
+        Event Creation Time(hhmmss): <input type="name" name="start_date" id="start_stamp_time"><br><hr>
+        UTC(True/False): <input type="name" name="start_date" id="stamp_UTC"><br><hr>
+        Event Start Date(yyyymmdd): <input type="name" name="start_date" id="start_date"><br><hr>
+        Event Start Time(hhmmss): <input type="name" name="start_date" id="start_time"><br><hr>
+        UTC(True/False): <input type="name" name="start_date" id="start_UTC"><br><hr>
+    </div>
+
+    <br \><br \><br \><br \>
+
+    <h3>Create Event</h3>
+    <select id="Create_event_list" placeholder="Choose a file ...">
+        <option value="">Choose a file ...</option>
+    </select>
+    <br \><br \>
+    <div id = "Create calendar"> <button id="make_event_button">Create Event</button><br><br>
+        UID: <input type="name" name="Create_event_UID" id="Create_event_UID"><br><hr>
+        Event Creation Date(yyyymmdd): <input type="name" name="Create_Creation_startDT" id="Create_Creation_startDT"><br><hr>
+        Event Creation Time(hhmmss): <input type="name" name="Create_Creation_startDT" id="Create_Creation_startTime"><br><hr>
+        UTC(True/False):<input type="name" name="Create_Creation_startDT" id="Stamp_UTC"><br><hr>
+
+        Event Start Date(yyyymmdd): <input type="name" name="Create_event_startDT" id="Create_event_startDT"><br><hr>
+        Event Start Time(hhmmss): <input type="name" name="Create_event_startDT" id="Create_event_startTime"><br><hr>
+        UTC(True/False):<input type="name" name="Create_Creation_startDT" id="Start_UTC"><br><hr>
+
+        Event Summary: <input type="name" name="summary" id="Create_event_summary"><br>
+    </div>
+    <br>
+    <br \><br \><br \><br \>
+    <script src="/index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
